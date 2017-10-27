@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+/Users/wantingzhang/eclipse-J2EE-workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+54783775.index
+1234244087.index
+3899822198.index
+1973636557.index
+3404613760.index
+2287522034.index
