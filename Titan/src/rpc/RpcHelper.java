@@ -2,6 +2,7 @@ package rpc;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import entity.Item;
+
 public class RpcHelper {
-	public static void writeJSONArray( HttpServletResponse response, JSONArray array ) {
+	public static void writeJSONArray(HttpServletResponse response, JSONArray array) {
 		try {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 			PrintWriter out = response.getWriter();
-	
 			out.print(array);
 			out.flush();
 			out.close();
@@ -23,13 +25,12 @@ public class RpcHelper {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void writeJSONObject ( HttpServletResponse response, JSONObject obj ) {
+
+	public static void writeJSONObject(HttpServletResponse response, JSONObject obj) {
 		try {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 			PrintWriter out = response.getWriter();
-	
 			out.print(obj);
 			out.flush();
 			out.close();
@@ -37,23 +38,34 @@ public class RpcHelper {
 			e.printStackTrace();
 		}
 	}
-	
-	public static JSONObject  readJSONObject ( HttpServletRequest request) {
-		
-			StringBuffer jb = new StringBuffer();
-			String line = null;
+
+	public static JSONObject readJSONObject(HttpServletRequest request) {
+
+		StringBuffer jb = new StringBuffer();
+		String line = null;
 		try {
 			BufferedReader reader = request.getReader();
 			while ((line = reader.readLine()) != null) {
 				jb.append(line);
 			}
 			reader.close();
-		    return new JSONObject(jb.toString());
+			return new JSONObject(jb.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	public static JSONArray getJSONArray(List<Item> items) {
+		JSONArray result = new JSONArray();
+		try {
+			for (Item item : items) {
+				result.put(item.toJSONObject());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

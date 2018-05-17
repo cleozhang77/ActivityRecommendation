@@ -53,6 +53,7 @@ public class ItemHistory extends HttpServlet {
 			array.put(obj);
 		}
 		RpcHelper.writeJSONArray(response, array);
+		conn.close();
 	}
 
 	/**

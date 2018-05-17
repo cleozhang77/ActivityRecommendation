@@ -17,6 +17,7 @@ import entity.Item;
 import entity.Item.ItemBuilder;
 
 public class TicketMasterAPI implements ExternalAPI {
+	//ZZwt890727
 	private static final String API_HOST = "app.ticketmaster.com";
 	private static final String SEARCH_PATH = "/discovery/v2/events.json";
 	private static final String DEFAULT_TERM = ""; // no restriction
@@ -35,6 +36,7 @@ public class TicketMasterAPI implements ExternalAPI {
 		term = urlEncodeHelper(term);
 		// Make your url query part like: "apikey=12345&geoPoint=abcd&keyword=music"
 		String query = String.format("apikey=%s&geoPoint=%s&radius=50&keyword=%s", API_KEY, geoHash, term);
+		//String query = String.format("apikey=%s&geoPoint=%s&keyword=%s", API_KEY, geoHash, term);
 		try {
 			// Create a HTTP connection between your Java application and TicketMaster based on url
 			HttpURLConnection connection = (HttpURLConnection) new URL(url + "?" + query).openConnection();
@@ -213,9 +215,9 @@ public class TicketMasterAPI implements ExternalAPI {
 	public static void main(String[] args) {
 		TicketMasterAPI tmApi = new TicketMasterAPI();
 		// Mountain View, CA
-		tmApi.queryAPI(37.38, -122.08);
+		//tmApi.queryAPI(37.38, -122.08);
 		// London, UK
-		// tmApi.queryAPI(51.503364, -0.12);
+		 tmApi.queryAPI(51.503364, -0.12);
 		// Houston, TX
 		//tmApi.queryAPI(29.682684, -95.295410);
 	}

@@ -48,11 +48,6 @@
 		btn.className += ' active';
 	}
 
-
-
-	  
-
-
 	function listItems(items) {
 		// Clear the current results
 		var itemList = $('item-list');
@@ -63,6 +58,7 @@
 		}
 	}
 
+	
 	function addItem(itemList, item) {
 		var item_id = item.item_id;
 
@@ -207,9 +203,13 @@
 			case 200:
 				callback(xhr.responseText);
 				break;
+			case 403:
+				onSessionInvalid();
+				break;
 			case 401:
 				errorHandler();
 				break;
+			
 			}
 		};
 
